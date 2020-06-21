@@ -15,34 +15,48 @@ import { useNavigation } from "@react-navigation/native";
 
 const Write = () => {
   const [typed, setTyped] = useState<string>();
+  const [print, setPrint] = useState<boolean>();
 
   function onChangeText(value: string) {
     setTyped(value);
+    if(value !== undefined && value !== ""){
+      setPrint(true);
+    }
+    else
+      setPrint(false);
   }
 
   return (
-    
-      <ImageBackground
-        source={require("../../assets/home-background.png")}
-        style={styles.container}
-      >
-        <View style={styles.main}>
-          <Text style={styles.title}>{typed}</Text>
-        </View>
+    <ImageBackground
+      source={require("../../assets/home-background.png")}
+      style={styles.container}
+    >
+      <View style={styles.main}>
+        <Text style={styles.title}>{typed}</Text>
+      </View>
 
-        <View style={styles.footer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Insira o texto aqui."
-            placeholderTextColor="black"
-            value={typed}
-            onChangeText={(text) => setTyped(text)}
-            maxLength={46}
-            autoCapitalize="characters"
-            autoCorrect={false}
-          ></TextInput>
-        </View>
-      </ImageBackground>
+      <View style={styles.footer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Insira o texto aqui."
+          placeholderTextColor="black"
+          value={typed}
+          onChangeText={(text) => onChangeText(text)}
+          maxLength={46}
+          autoCapitalize="characters"
+          autoCorrect={false}
+        ></TextInput>
+        {print ? <RectButton 
+        style={styles.button}>
+          <View style={styles.buttonIcon}>
+            <Text>
+              <Icon name="camera" color="#FFF" size={24} />
+            </Text>
+          </View>
+        </RectButton> : null}
+        
+      </View>
+    </ImageBackground>
   );
 };
 
@@ -111,7 +125,7 @@ const styles = StyleSheet.create({
 
   buttonIcon: {
     height: 60,
-    width: 60,
+    width: "100%",
     backgroundColor: "rgba(0, 0, 0, 0.1)",
     justifyContent: "center",
     alignItems: "center",
