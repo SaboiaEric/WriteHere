@@ -21,10 +21,7 @@ const Write = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS ? "padding" : undefined}
-    >
+    
       <ImageBackground
         source={require("../../assets/home-background.png")}
         style={styles.container}
@@ -46,7 +43,6 @@ const Write = () => {
           ></TextInput>
         </View>
       </ImageBackground>
-    </KeyboardAvoidingView>
   );
 };
 
