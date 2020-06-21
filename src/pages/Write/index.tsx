@@ -14,16 +14,10 @@ import { RectButton } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 const Write = () => {
-  const [uf, setUf] = useState("");
-  const [city, setCity] = useState("");
+  const [typed, setTyped] = useState<string>();
 
-  const navigation = useNavigation();
-
-  function handleNavigateToPoints() {
-    navigation.navigate("Points", {
-      uf,
-      city,
-    });
+  function onChangeText(value: string) {
+    setTyped(value);
   }
 
   return (
@@ -35,13 +29,21 @@ const Write = () => {
         source={require("../../assets/home-background.png")}
         style={styles.container}
       >
-        <View style={styles.main}></View>
+        <View style={styles.main}>
+          <Text style={styles.title}>{typed}</Text>
+        </View>
 
         <View style={styles.footer}>
-          <Text style={styles.title}>Let's try</Text>
           <TextInput
-            style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-          />
+            style={styles.input}
+            placeholder="Insira o texto aqui."
+            placeholderTextColor="black"
+            value={typed}
+            onChangeText={(text) => setTyped(text)}
+            maxLength={46}
+            autoCapitalize="characters"
+            autoCorrect={false}
+          ></TextInput>
         </View>
       </ImageBackground>
     </KeyboardAvoidingView>
@@ -92,11 +94,13 @@ const styles = StyleSheet.create({
 
   input: {
     height: 60,
-    backgroundColor: "#FFF",
     borderRadius: 10,
     marginBottom: 8,
     paddingHorizontal: 24,
-    fontSize: 16,
+    fontSize: 20,
+    backgroundColor: "rgba(86, 207, 225, 0.0)",
+    borderWidth: 1,
+    textAlign: "center",
   },
 
   button: {
